@@ -40,8 +40,8 @@ my.get.reads.count <- function(ibatch,PARAMETERS,ANNOTATION,ANNOTATION_BATCH_ID,
       reads_count[,ibam]=.get.check.points.reads.count(ibam,anno,bam,check_points,PARAMETERS)
     }
     # compile result
-    as_tibble(reads_count)%>%
-      mutate(batch_id=ibatch,
+    tibble::as_tibble(reads_count)%>%
+      dplyr::mutate(batch_id=ibatch,
              check_points=check_points)%>%return()
     #batch_id=rep(ibatch,no_check_points)
     #report=cbind(reads_count,batch_id,check_points)
@@ -51,7 +51,7 @@ my.get.reads.count <- function(ibatch,PARAMETERS,ANNOTATION,ANNOTATION_BATCH_ID,
     #report=report[character(0),]
     return()
   }
-}
+}  
 
 
 

@@ -22,8 +22,7 @@ metpeak_extract_reads <- function(
   METHOD=0
   
 ){
-  library(tidyverse)
-  library(tibble)
+
   # Wrap parameters ##################################################
   PARAMETERS=list();
   PARAMETERS$GENE_ANNO_GTF=GENE_ANNO_GTF
@@ -110,6 +109,6 @@ metpeak_extract_reads <- function(
     READS_COUNT[[igroup]]=bind_rows(temp)
     #READS_COUNT=rbind(READS_COUNT,reads_count_group)
   }
-  READS_COUNT = bind_rows(READS_COUNT)
+  READS_COUNT = dplyr::bind_rows(READS_COUNT)
   saveRDS(object = READS_COUNT,file = paste0(PARAMETERS$OUTPUT_DIR,"READS_COUNT.rds"))
 }
