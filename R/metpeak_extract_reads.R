@@ -106,7 +106,7 @@ metpeak_extract_reads <- function(
     #for (ibatch in 1:no_batch){
     #  reads_count_group=rbind(reads_count_group,temp[[ibatch]])
     #}
-    READS_COUNT[[igroup]]=bind_rows(temp)
+    READS_COUNT[[igroup]]=dplyr::bind_rows(temp)
     #READS_COUNT=rbind(READS_COUNT,reads_count_group)
   }
   READS_COUNT = dplyr::bind_rows(READS_COUNT)
