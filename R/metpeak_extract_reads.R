@@ -22,7 +22,8 @@ metpeak_extract_reads <- function(
   METHOD=0
   
 ){
-  
+  library(tidyverse)
+  library(tibble)
   # Wrap parameters ##################################################
   PARAMETERS=list();
   PARAMETERS$GENE_ANNO_GTF=GENE_ANNO_GTF
