@@ -60,6 +60,9 @@ metpeak_extract_reads <- function(
   if (is.na(PARAMETERS$MINIMAL_PEAK_LENGTH)) {PARAMETERS$MINIMAL_PEAK_LENGTH=PARAMETERS$FRAGMENT_LENGTH/2}
   if (is.na(PARAMETERS$PEAK_CUTOFF_PVALUE)) {PARAMETERS$PEAK_CUTOFF_TYPE="FDR"} else  {PARAMETERS$PEAK_CUTOFF_TYPE="PVALUE"}
   if (is.na(PARAMETERS$OUTPUT_DIR)) {PARAMETERS$OUTPUT_DIR=getwd()}
+
+  #print(PARAMETERS$OUTPUT_DIR)
+  saveRDS(object = PARAMETERS,file = paste0(PARAMETERS$OUTPUT_DIR,"/PARAMETERS.rds"))
   
   # algrithm ##################################################
   
@@ -110,5 +113,5 @@ metpeak_extract_reads <- function(
     #READS_COUNT=rbind(READS_COUNT,reads_count_group)
   }
   READS_COUNT = dplyr::bind_rows(READS_COUNT)
-  saveRDS(object = READS_COUNT,file = paste0(PARAMETERS$OUTPUT_DIR,"READS_COUNT.rds"))
+  saveRDS(object = READS_COUNT,file = paste0(PARAMETERS$OUTPUT_DIR,"/READS_COUNT.rds"))
 }
