@@ -1,4 +1,34 @@
-
+divide.anno.into.batches <- function(anno){
+  print("Divide transcriptome into chr-gene-batch sections ...")
+  
+  # divide into chr-gene
+  chr_gene = paste(anno$chr,anno$gene,anno$strand)
+  unique_chr_gene = unique(chr_gene)
+  ID = match(chr_gene, unique_chr_gene)
+  gene_chr_ID=ID
+  
+  # group
+  noGroups=ceiling(max(ID)/100);
+  group_bar=round(seq(from = 1, to = max(ID)+1,length.out=noGroups+1))
+  
+  for (igroup in 1:noGroups) {
+    # print(igroup)
+    id_selected=which(((ID >= group_bar[igroup]) + (ID < group_bar[igroup+1]))==2)
+    anno_small=anno[id_selected,]
+    ID_small=ID[id_selected]-group_bar[igroup]+1
+    
+    # return result
+    ID_small_new = .divide.anno.into.batches.small(anno_small,ID_small)
+    ID_small_new[ID_small_new > max(ID_small)]= 
+      ID_small_new[ID_small_new > max(ID_small)] - max(ID_small) + max(ID);
+    ID_small_new[ID_small_new <= max(ID_small)]=
+      ID_small_new[ID_small_new <= max(ID_small)] + group_bar[igroup] - 1
+    ID[id_selected]=ID_small_new
+  }
+  
+  return(as.integer(ID))
+  
+}
 .divide.anno.into.batches <- function(anno){
 print("Divide transcriptome into chr-gene-batch sections ...")
 
