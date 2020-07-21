@@ -81,6 +81,7 @@
     H[2,2] <- wght[1]*trigamma(sum(c))*m - t(postprob[,1]) %*% (.help.trigamma(as.matrix(n),sum(c))) + t(postprob[,1]) %*% (.help.trigamma(as.matrix(y),c[2]))  - wght[1]*trigamma(c[2])*m    
     H[1,2] <- wght[1]*trigamma(sum(c))*m - t(postprob[,1]) %*% (.help.trigamma(as.matrix(n),sum(c)))
     H[2,1] <- H[1,2]
+    if (any(is.na(H))){break}
     eigvalue <- eigen(H)$values
     if ( (any(beta < Npara)) | (any(alpha < Npara))
          | (abs(eigvalue[1]/eigvalue[2]) > 1e12) | (abs(eigvalue[1]/eigvalue[2]) < 1e-12)
@@ -105,6 +106,7 @@
     H[1,2] <- wght[2]*trigamma(sum(c))*m - t(postprob[,2]) %*% (.help.trigamma(as.matrix(n),sum(c)))
     H[2,1] <- H[1,2]
     # if the H is nearly sigular then break
+    if (any(is.na(H))){break}
     eigvalue <- eigen(H)$values 
     
     if ( (any(beta < Npara)) | (any(alpha < Npara))
